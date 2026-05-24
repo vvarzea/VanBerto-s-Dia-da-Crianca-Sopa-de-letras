@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-PT" xml:lang="pt-PT" translate="no">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
 <meta name="theme-color" content="#1a0a2e"/>
+<meta http-equiv="Content-Language" content="pt-PT"/>
+<meta name="language" content="pt-PT"/>
 <title>VanBerto's — Sopa de Letras · Dia da Criança</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Baloo+2:wght@700;800;900&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet"/>
 <style>
@@ -19,50 +21,16 @@ body{
   -webkit-user-select:none;
 }
 
-/* ═══ HEADER ═══ */
-#vb-header{
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  background:rgba(12,4,30,.92);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-bottom:2.5px solid rgba(255,107,53,.5);
-  padding:.5rem 1rem .4rem;
-  display:flex;align-items:center;justify-content:space-between;gap:.5rem;
-  box-shadow:0 2px 22px rgba(0,0,0,.5),0 0 30px rgba(255,107,53,.07);
-}
-.hd-left{display:flex;align-items:center;gap:.5rem;}
-.hd-robot{
-  height:clamp(36px,6vw,48px);width:auto;
-  filter:drop-shadow(0 0 9px rgba(56,189,248,.65));
-  animation:vbFloat 3s ease-in-out infinite;
-  cursor:pointer;flex-shrink:0;
-}
-.hd-robot:hover{filter:drop-shadow(0 0 18px #38bdf8);}
 @keyframes vbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.hd-titles{display:flex;flex-direction:column;gap:.05rem;}
-.hd-brand{
-  font-family:'Fredoka One',cursive;
-  font-size:clamp(1.05rem,3.2vw,1.5rem);
-  color:#ffd700;line-height:1;
-  text-shadow:0 2px 12px rgba(255,107,53,.55);
-}
-.hd-sub{
-  font-family:'Nunito',sans-serif;
-  font-size:clamp(.65rem,1.8vw,.8rem);
-  color:#ffb890;font-weight:800;line-height:1;
-}
-.hd-right{
-  font-family:'Nunito',sans-serif;
-  font-size:clamp(.6rem,1.6vw,.75rem);
-  color:#ffb890;font-weight:800;
-  text-align:right;line-height:1.35;
-}
-.hd-right strong{color:#ffd700;display:block;}
+#prof-tag{position:fixed;bottom:.6rem;right:.75rem;z-index:600;font-family:'Nunito',sans-serif;font-size:clamp(.65rem,1.8vw,.78rem);color:#ffb890;font-weight:800;white-space:nowrap;text-shadow:0 1px 6px rgba(0,0,0,.8);pointer-events:none;}
 
 /* ═══ SCREENS ═══ */
 .screen{
   display:none;
   min-height:100vh;
-  padding:calc(clamp(36px,6vw,48px) + 1.2rem) 1rem 6rem;
+  min-height:100dvh;
+  padding:1.5rem 1rem 4rem;
+  padding-bottom:max(4rem, calc(4rem + env(safe-area-inset-bottom)));
   align-items:center;justify-content:center;flex-direction:column;
 }
 .screen.active{display:flex;}
@@ -209,17 +177,20 @@ body{
 
 /* ═══ GAME SCREEN ═══ */
 #gameScreen{
-  padding-top:calc(clamp(36px,6vw,48px) + .8rem);
-  padding-bottom:5rem;
+  padding-top:.75rem;
+  padding-bottom:max(6rem, calc(6rem + env(safe-area-inset-bottom)));
+  padding-left:.5rem;
+  padding-right:.5rem;
   background:#1a0a2e;
   animation:none;
+  align-items:stretch;
 }
 .game-header{
   width:100%;max-width:1000px;
-  margin:0 auto .6rem;
+  margin:0 auto .4rem;
   display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:.4rem;
-  padding:0 .25rem;
+  flex-wrap:wrap;gap:.3rem;
+  padding:0 .1rem;
 }
 .game-player{
   font-family:'Nunito',sans-serif;font-size:.82rem;font-weight:800;
@@ -240,32 +211,38 @@ body{
   width:100%;max-width:1000px;
   margin:0 auto;
   display:flex;
-  gap:clamp(8px,1.5vw,16px);
+  gap:clamp(6px,1.5vw,16px);
   align-items:flex-start;
+  flex:1;
 }
 
 /* GRID */
 #grid-wrap{
   flex:1;
   min-width:0;
+  /* ensure it doesn't overflow */
+  overflow:hidden;
 }
 #grid{
   display:grid;
   cursor:pointer;
   user-select:none;
   -webkit-user-select:none;
-  gap:clamp(2px,0.4vw,4px);
+  gap:clamp(1px,0.3vw,4px);
   width:100%;
+  /* prevent grid from being clipped */
+  touch-action:none;
 }
 .cell{
   display:flex;align-items:center;justify-content:center;
   font-family:'Baloo 2',sans-serif;font-weight:900;
-  border-radius:6px;
+  border-radius:5px;
   background:rgba(255,107,53,.08);
   color:#ffd700;
   border:1.5px solid rgba(255,107,53,.22);
   transition:background .08s,color .08s;
   touch-action:none;
+  -webkit-touch-callout:none;
   aspect-ratio:1;
   /* font-size set by JS */
 }
@@ -288,8 +265,8 @@ body{
 
 /* SIDEBAR */
 .sidebar{
-  flex:0 0 clamp(120px,22vw,185px);
-  display:flex;flex-direction:column;gap:4px;
+  flex:0 0 clamp(110px,22vw,185px);
+  display:flex;flex-direction:column;gap:3px;
 }
 .words-title{
   font-family:'Baloo 2',sans-serif;font-size:.82rem;font-weight:900;
@@ -327,22 +304,22 @@ body{
   gap:8px;flex-wrap:wrap;
 }
 
-/* ═══ ROBOT CORNER ═══ */
+/* ═══ ROBOT SIDEBAR ═══ */
 .robot-wrap{
-  position:fixed;bottom:.9rem;right:.9rem;z-index:600;
-  display:flex;flex-direction:column;align-items:center;gap:0;
-  opacity:0;pointer-events:none;
-  transition:opacity .35s;
+  display:none;
+  flex-direction:column;align-items:center;gap:4px;
+  margin-top:10px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,107,53,.2);
 }
-.robot-wrap.visible{opacity:1;pointer-events:auto;}
+.robot-wrap.visible{display:flex;}
 .robot-name{
   font-family:'Fredoka One',cursive;
   font-size:clamp(.7rem,2vw,.85rem);
   color:#ffd700;
   text-shadow:0 1px 6px rgba(0,0,0,.8),0 0 10px rgba(255,107,53,.4);
   text-align:center;
-  margin-top:4px;
-  max-width:120px;
+  margin-top:2px;
   line-height:1.2;
   letter-spacing:.02em;
 }
@@ -350,15 +327,15 @@ body{
   --bc:#dcebff;
   background:linear-gradient(135deg,var(--bc),#fff);
   border:3px solid #0f172a;outline:2px solid #1e293b;outline-offset:-4px;
-  border-radius:20px;padding:10px 13px 9px;
+  border-radius:20px;padding:8px 11px 7px;
   box-shadow:4px 4px 0 #0f172a;
   font-family:"Comic Sans MS","Trebuchet MS",sans-serif;
-  font-size:clamp(.75rem,2.2vw,.92rem);font-weight:bold;color:#0f172a;
-  max-width:185px;min-width:130px;text-align:center;
+  font-size:clamp(.68rem,2.2vw,.92rem);font-weight:bold;color:#0f172a;
+  max-width:160px;min-width:110px;text-align:center;
   pointer-events:none;position:relative;
   opacity:0;transform:translateY(8px) scale(.88);
   transition:opacity .38s,transform .38s cubic-bezier(.34,1.56,.64,1);
-  margin-bottom:6px;
+  margin-bottom:4px;
 }
 .bubble::after{
   content:"";position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);
@@ -372,7 +349,7 @@ body{
 }
 .bubble.show{opacity:1;transform:translateY(0) scale(1);}
 #vb-robot{
-  width:clamp(70px,11vw,106px);
+  width:clamp(60px,10vw,90px);
   cursor:pointer;flex-shrink:0;
   animation:vbFloat 3s ease-in-out infinite;
   filter:drop-shadow(0 0 10px #7dd3fc);
@@ -437,53 +414,42 @@ body{
   .sidebar{
     flex:none;width:100%;
     display:flex;flex-direction:row;flex-wrap:wrap;gap:4px;
+    order: 2;
   }
+  #grid-wrap{ order: 1; }
   .sidebar .words-title{width:100%;}
   .word-item{flex:0 0 calc(50% - 4px);}
-  .robot-wrap{bottom:.5rem;right:.5rem;}
-  #vb-robot{width:clamp(58px,14vw,80px);}
+  /* Robot is inline in sidebar on mobile too */
+  .bubble{max-width:130px;min-width:90px;font-size:.7rem;padding:6px 9px 5px;}
+  .robot-name{font-size:.7rem;}
+  /* Game header compact */
+  .game-header{gap:.25rem;}
+  .level-bar-game .lvl-btn{padding:.28rem .55rem;font-size:.72rem;}
+  /* Smaller buttons on mobile */
+  .btn{padding:6px 10px;font-size:.76rem;}
+  #gameScreen{padding-bottom:max(5rem, calc(5rem + env(safe-area-inset-bottom)));}
 }
 @media(max-width:380px){
   .word-item{flex:0 0 100%;}
+  .bubble{display:none;}/* hide bubble on very small screens to save space */
+  .bottom-bar{padding-right:70px;}
+  .level-bar .lvl-btn,.level-bar-game .lvl-btn{padding:.25rem .45rem;font-size:.68rem;}
+}
+/* Landscape phone */
+@media(max-height:500px) and (orientation:landscape){
+  #gameScreen{padding-top:.5rem;padding-bottom:4rem;}
+  .game-layout{flex-direction:row;}
+  .sidebar{flex:0 0 clamp(100px,20vw,150px);}
+  /* robot stays in sidebar in landscape */
+  .bottom-bar{margin-top:.3rem;}
 }
 </style>
 </head>
-<body>
+<body lang="pt-PT">
 
 <!-- ═══ HEADER ═══ -->
-<header id="vb-header">
-  <div class="hd-left">
-    <div class="hd-titles">
-      <span class="hd-brand">VanBerto's</span>
-      <span class="hd-sub">🎈 Sopa de Letras — Dia da Criança</span>
-    </div>
-  </div>
-  <div class="hd-right">Professora:<strong>Vanda Várzea</strong></div>
-</header>
 
-<!-- ═══ ROBOT CORNER ═══ -->
-<div class="robot-wrap">
-  <div class="bubble" id="bubble" role="status" aria-live="polite">Olá! 😊</div>
-  <svg id="vb-robot" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" role="button" tabindex="0" aria-label="VanBerto — clica para falar">
-    <defs>
-      <linearGradient id="rbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e5f2ff"/><stop offset="100%" stop-color="#bfdbfe"/></linearGradient>
-      <linearGradient id="rvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#22d3ee"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient>
-    </defs>
-    <circle cx="40" cy="40" r="34" fill="rgba(147,197,253,0.35)"/>
-    <rect x="18" y="30" width="44" height="32" rx="14" fill="url(#rbg)"/>
-    <circle cx="40" cy="46" r="7" fill="#9ca3af"/>
-    <rect x="22" y="10" width="36" height="26" rx="13" fill="url(#rbg)"/>
-    <rect x="26" y="15" width="28" height="16" rx="8" fill="url(#rvg)"/>
-    <rect class="vb-eyelid" x="26" y="15" width="28" height="16" rx="8" fill="#e5f2ff" opacity="0.9"/>
-    <circle cx="33" cy="23" r="2.5" fill="#0f172a"/><circle cx="47" cy="23" r="2.5" fill="#0f172a"/>
-    <circle cx="34.2" cy="21.5" r="1" fill="white" opacity="0.8"/><circle cx="48.2" cy="21.5" r="1" fill="white" opacity="0.8"/>
-    <line x1="40" y1="10" x2="40" y2="4" stroke="#38bdf8" stroke-width="2"/><circle cx="40" cy="3" r="2.5" fill="#38bdf8"/>
-    <rect x="12" y="34" width="6" height="20" rx="3" fill="#e5e7eb"/>
-    <rect class="vb-arm" x="62" y="34" width="6" height="20" rx="3" fill="#e5e7eb"/>
-    <rect x="22" y="58" width="12" height="8" rx="3" fill="#1f2937"/><rect x="46" y="58" width="12" height="8" rx="3" fill="#1f2937"/>
-  </svg>
-  <div class="robot-name" id="robot-player-name">👤 Herói</div>
-</div>
+
 
 <!-- ═══ ECRÃ INICIAL ═══ -->
 <div id="startScreen" class="screen active">
@@ -512,7 +478,7 @@ body{
     <div class="modal-title">🎈 Sopa de Letras<br>Dia da Criança</div>
     <div class="name-row">
       <label for="playerName">O teu nome:</label>
-      <input type="text" id="playerName" maxlength="22" placeholder="Escreve o teu nome…" autocomplete="off"/>
+      <input type="text" id="playerName" maxlength="22" placeholder="Escreve o teu nome…" autocomplete="off" lang="pt-PT" spellcheck="true" inputmode="text"/>
     </div>
     <div class="level-bar">
       <button class="lvl-btn easy active" data-level="easy">⭐ Fácil</button>
@@ -524,7 +490,6 @@ body{
       <button id="btnStart" class="btn primary">▶ Começar a jogar!</button>
     </div>
     <p class="tiny">PC: clica e arrasta · Tablet/telemóvel: toca e arrasta</p>
-    <p class="modal-sub" style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,107,53,.3);">Professora: <strong style="color:#ffd700">Vanda Várzea</strong></p>
   </div>
 </div>
 
@@ -540,11 +505,33 @@ body{
   </div>
   <p class="lvl-desc" id="gameLvlDesc" style="width:100%;max-width:1000px;margin:0 auto .3rem;"></p>
   <div class="progress-wrap"><div class="progress-bar" id="pbar" style="width:0%"></div></div>
-  <div class="game-layout">
+  <div class="game-layout" id="game-layout">
     <div id="grid-wrap"><div id="grid"></div></div>
     <div class="sidebar">
       <div class="words-title">📋 Palavras</div>
       <div id="word-list"></div>
+      <div class="robot-wrap" id="robot-wrap-inline">
+        <div class="bubble" id="bubble" role="status" aria-live="polite">Olá! 😊</div>
+        <svg id="vb-robot" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" role="button" tabindex="0" aria-label="VanBerto — clica para falar">
+          <defs>
+            <linearGradient id="rbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e5f2ff"/><stop offset="100%" stop-color="#bfdbfe"/></linearGradient>
+            <linearGradient id="rvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#22d3ee"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient>
+          </defs>
+          <circle cx="40" cy="40" r="34" fill="rgba(147,197,253,0.35)"/>
+          <rect x="18" y="30" width="44" height="32" rx="14" fill="url(#rbg)"/>
+          <circle cx="40" cy="46" r="7" fill="#9ca3af"/>
+          <rect x="22" y="10" width="36" height="26" rx="13" fill="url(#rbg)"/>
+          <rect x="26" y="15" width="28" height="16" rx="8" fill="url(#rvg)"/>
+          <rect class="vb-eyelid" x="26" y="15" width="28" height="16" rx="8" fill="#e5f2ff" opacity="0.9"/>
+          <circle cx="33" cy="23" r="2.5" fill="#0f172a"/><circle cx="47" cy="23" r="2.5" fill="#0f172a"/>
+          <circle cx="34.2" cy="21.5" r="1" fill="white" opacity="0.8"/><circle cx="48.2" cy="21.5" r="1" fill="white" opacity="0.8"/>
+          <line x1="40" y1="10" x2="40" y2="4" stroke="#38bdf8" stroke-width="2"/><circle cx="40" cy="3" r="2.5" fill="#38bdf8"/>
+          <rect x="12" y="34" width="6" height="20" rx="3" fill="#e5e7eb"/>
+          <rect class="vb-arm" x="62" y="34" width="6" height="20" rx="3" fill="#e5e7eb"/>
+          <rect x="22" y="58" width="12" height="8" rx="3" fill="#1f2937"/><rect x="46" y="58" width="12" height="8" rx="3" fill="#1f2937"/>
+        </svg>
+        <div class="robot-name" id="robot-player-name">👤 Herói</div>
+      </div>
     </div>
   </div>
   <div id="msg"></div>
@@ -575,6 +562,8 @@ body{
 </div>
 
 <!-- ═══ CONFETTI ═══ -->
+<div id="prof-tag">✦ Professora Vanda Várzea ✦</div>
+
 <div id="confetti" class="hidden" aria-hidden="true"></div>
 
 <script>
@@ -634,9 +623,18 @@ function fillR(g,s){const L='ABCDEFGHIJKLMNOPQRSTUVWXYZ';for(let r=0;r<s;r++)for
 /* ── CELL SIZE: fill available width ── */
 function calcCellSize(s){
   const gw=document.getElementById('grid-wrap');
-  const avail=gw.getBoundingClientRect().width||gw.offsetWidth;
-  const gap=(s-1)*3;
-  return Math.floor((avail-gap)/s);
+  const gl=document.getElementById('game-layout')||document.querySelector('.game-layout');
+  // Use offsetWidth for accuracy; subtract border/outline if any
+  let avail=gw.getBoundingClientRect().width||gw.offsetWidth;
+  // Ensure we have a sane value (sometimes layout not yet settled)
+  if(avail<40){
+    const sw=window.innerWidth;
+    const isMobile=sw<600;
+    avail=isMobile ? sw-16 : Math.min(sw*.65, 600);
+  }
+  const gap=Math.max(1, Math.floor((s-1)*(window.innerWidth<600?1.5:3)));
+  const cs=Math.floor((avail-gap)/s);
+  return Math.max(cs, 14); // never smaller than 14px
 }
 
 function buildGame(){
@@ -645,21 +643,24 @@ function buildGame(){
   document.getElementById('hints-left').textContent=hintsLeft;
   L.words.forEach(w=>{const co=placeW(grid,w,L.dirs,s);if(co)placed.push({word:w,coords:co});});
   fillR(grid,s);
-  renderGrid(s);
-  renderWL();
-  document.getElementById('msg').textContent='';
-  document.getElementById('score').textContent='0 / '+placed.length+' encontradas';
-  document.getElementById('pbar').style.width='0%';
+  // Wait two frames so browser has laid out grid-wrap before measuring
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    renderGrid(s);
+    renderWL();
+    document.getElementById('msg').textContent='';
+    document.getElementById('score').textContent='0 / '+placed.length+' encontradas';
+    document.getElementById('pbar').style.width='0%';
+  }));
 }
 
 function renderGrid(s){
   const el=document.getElementById('grid');
   const cs=calcCellSize(s);
-  const gap=3;
+  const gap=Math.max(1, window.innerWidth<600 ? 2 : 3);
   el.style.gridTemplateColumns=`repeat(${s},${cs}px)`;
   el.style.gap=gap+'px';
   el.innerHTML='';cells=[];
-  const fs=cs<=22?'0.65rem':cs<=28?'0.78rem':cs<=34?'0.88rem':'1rem';
+  const fs=cs<=16?'0.5rem':cs<=22?'0.62rem':cs<=28?'0.75rem':cs<=34?'0.88rem':'1rem';
   for(let r=0;r<s;r++)for(let c=0;c<s;c++){
     const d=document.createElement('div');
     d.className='cell';d.textContent=grid[r][c];
@@ -743,7 +744,11 @@ function addEv(){
 
 /* redraw on resize */
 let resizeT=null;
-window.addEventListener('resize',()=>{clearTimeout(resizeT);resizeT=setTimeout(()=>{if(grid.length)renderGrid(LEVELS[lvl].size);},180);});
+window.addEventListener('resize',()=>{clearTimeout(resizeT);resizeT=setTimeout(()=>{
+  if(grid.length&&document.getElementById('gameScreen').classList.contains('active')){
+    renderGrid(LEVELS[lvl].size);
+  }
+},200);});
 
 /* ── LEVEL BUTTONS ── */
 document.querySelectorAll('#startScreen .lvl-btn').forEach(b=>b.addEventListener('click',()=>{
@@ -864,7 +869,7 @@ setInterval(()=>{
   }
 },18000);
 
-setTimeout(()=>showBub('Olá! Sou o VanBerto! 🤖 Encontra todas as palavras! 🎈'),900);
+setTimeout(()=>showBub('Olá! Sou o VanBerto! Encontra todas as palavras! 🎈'),900);
 </script>
 </body>
 </html>
